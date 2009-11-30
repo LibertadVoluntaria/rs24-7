@@ -2,17 +2,16 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.rs247.script.threads;
+
+package com.rs247.script;
 
 /**
  *
  * @author Wewt
  */
-public abstract class RuneThread {
+public class ScriptLoader {
 
-    public boolean running = true;
-
-    public RuneThread() {
+    public ScriptLoader() {
         // Constructor
     }
 }

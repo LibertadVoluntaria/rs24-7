@@ -21,7 +21,7 @@ public class TestParse {
         HashMap<String, String> map = new HashMap<String, String>();
 
         try {
-            String html = readPage(new URL("http://world"+world+".runescape.com/a2,m0,j0,o0"), "http://google.com/");
+            String html = readPage(new URL("http://world" + world + ".runescape.com/a2,m0,j0,o0"), "http://google.com/");
             Pattern regex = Pattern.compile("<param name=([^\\s]+)\\s+value=([^>]*)>", Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE);
             Matcher regexMatcher = regex.matcher(html);
             while (regexMatcher.find()) {

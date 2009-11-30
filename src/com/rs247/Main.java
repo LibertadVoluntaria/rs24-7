@@ -25,7 +25,7 @@ public class Main {
         File f2 = new File(System.getProperty("user.home") + "\\rs247\\loader.jar");
         File dir = new File(System.getProperty("user.home") + "\\rs247\\");
         dir.mkdir();
-        if (!f.exists() || !f2.exists())  {
+        if (!f.exists() || !f2.exists()) {
             int i = JOptionPane.showConfirmDialog(null, "RuneScape Jar does not exist. Download now?", "Download RuneScape Jar?", JOptionPane.YES_NO_OPTION);
 
             switch (i) {

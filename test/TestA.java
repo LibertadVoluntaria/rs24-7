@@ -12,7 +12,7 @@ import java.lang.reflect.Method;
 public class TestA {
 
     public TestA() {
-        doMethod("ShowOne",null);
+        doMethod("ShowOne", null);
     }
 
     public void doMethod(String methName, Object[] params) {

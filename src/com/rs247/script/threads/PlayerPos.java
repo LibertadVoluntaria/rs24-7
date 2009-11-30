@@ -29,7 +29,8 @@ public class PlayerPos extends RuneThread implements Runnable {
                 echo.echoThread("Playercount is currently: " + playerCount);
                 try {
                     Thread.sleep(5000);
-                } catch(Exception e) { }
+                } catch (Exception e) {
+                }
             } catch (Exception e) {
             }
 

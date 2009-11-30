@@ -15,9 +15,10 @@ public abstract class Script implements Runnable {
     }
 
     public abstract String getName();
-    // Test
-    
+
     public abstract boolean onStart();
+
+    public abstract String getVersion();
     public boolean active = false;
 
     public abstract int loop();
@@ -35,6 +36,5 @@ public abstract class Script implements Runnable {
     }
 
     public void disguise(String toChange) {
-        
     }
 }

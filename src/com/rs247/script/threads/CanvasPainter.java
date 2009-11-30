@@ -37,16 +37,17 @@ public class CanvasPainter extends Thread implements Runnable {
             String[] interfaceActions = null;
             try {
                 interfaceActions = (String[]) frame.getObjectValue("getInterfaceActions()").getValue();
-                
-            }catch(Exception e) { }
-            
+
+            } catch (Exception e) {
+            }
+
             while (canvas.getGraphics() == null);
 
             g = canvas.getGraphics();
-            int i=0;
-            for(String s : interfaceActions) {
-                int ypos = (17*i) + 15;
-                g.drawString("Action: " + s, 15,ypos);
+            int i = 0;
+            for (String s : interfaceActions) {
+                int ypos = (17 * i) + 15;
+                g.drawString("Action: " + s, 15, ypos);
                 i++;
             }
 
@@ -64,7 +65,6 @@ public class CanvasPainter extends Thread implements Runnable {
     }
 
     public void doPaint(Graphics g) {
-
     }
     public Canvas canvas;
     public int playerCount;
