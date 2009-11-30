@@ -22,7 +22,7 @@ public class RuneStub implements AppletStub {
     private boolean useSigned;
     private int worldLoaded;
     public Applet theApplet;
-    private HashMap<String,String> params = new HashMap<String,String>();
+    private HashMap<String, String> params = new HashMap<String, String>();
     private ClassLoader clientClassLoader;
 
     public RuneStub(boolean signed, int world, RuneClassLoader rcl) {
@@ -46,6 +46,7 @@ public class RuneStub implements AppletStub {
     public Applet getApplet() {
         return this.theApplet;
     }
+
     public boolean isActive() {
         return false;
     }

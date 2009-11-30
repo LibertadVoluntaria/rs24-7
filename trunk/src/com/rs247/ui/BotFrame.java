@@ -12,6 +12,7 @@ package com.rs247.ui;
 
 import com.rs247.client.*;
 import com.rs247.input.Keyboard;
+import com.rs247.script.ScriptHandler;
 import com.rs247.script.threads.*;
 import com.rs247.util.Echo;
 import java.applet.Applet;
@@ -35,6 +36,7 @@ public class BotFrame extends javax.swing.JFrame {
     private Applet a;
     public Echo echo;
     public Graphics g;
+    private ScriptHandler scriptHandler;
 
     /** Creates new form BotFrame */
     public BotFrame() {
@@ -49,15 +51,6 @@ public class BotFrame extends javax.swing.JFrame {
         System.setOut(console.getOutStream());
         echo = new Echo(this);
         rsLoader = new RuneClassLoader(loadSigned.getState());
-        try {
-            Component comp = this.getComponentAt(1, 1);
-            while (comp.getKeyListeners().length == 0) {
-                wait(10);
-            }
-            keyboard = new Keyboard(this, comp.getKeyListeners()[0], 70, 80);
-            comp.addKeyListener(keyboard);
-        } catch (Exception e) {
-        }
 
 
 
@@ -90,11 +83,13 @@ public class BotFrame extends javax.swing.JFrame {
         menu = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        mnScripts = new javax.swing.JMenu();
+        loadScripts = new javax.swing.JMenuItem();
         mnBotting = new javax.swing.JMenu();
         loadRS = new javax.swing.JMenuItem();
         mnSettings = new javax.swing.JMenu();
         loadSigned = new javax.swing.JCheckBoxMenuItem();
+        rRandoms = new javax.swing.JCheckBoxMenuItem();
         mnDebug = new javax.swing.JMenu();
         loginIndex = new javax.swing.JMenuItem();
         doDraw = new javax.swing.JMenuItem();
@@ -104,6 +99,7 @@ public class BotFrame extends javax.swing.JFrame {
 
         jButton1.setText("Start CanvasPainter");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
+
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
@@ -114,8 +110,18 @@ public class BotFrame extends javax.swing.JFrame {
         jMenuItem1.setText("About");
         jMenu1.add(jMenuItem1);
 
-        jMenuItem2.setText("Scripts");
-        jMenu1.add(jMenuItem2);
+        mnScripts.setText("Scripts");
+
+        loadScripts.setText("Load Scripts");
+        loadScripts.addActionListener(new java.awt.event.ActionListener() {
+
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loadScriptsActionPerformed(evt);
+            }
+        });
+        mnScripts.add(loadScripts);
+
+        jMenu1.add(mnScripts);
 
         menu.add(jMenu1);
 
@@ -124,6 +130,7 @@ public class BotFrame extends javax.swing.JFrame {
         loadRS.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.CTRL_MASK));
         loadRS.setText("Load RuneScape");
         loadRS.addActionListener(new java.awt.event.ActionListener() {
+
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 loadRSActionPerformed(evt);
             }
@@ -136,11 +143,16 @@ public class BotFrame extends javax.swing.JFrame {
 
         loadSigned.setText("Load Signed");
         loadSigned.addChangeListener(new javax.swing.event.ChangeListener() {
+
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 loadSignedStateChanged(evt);
             }
         });
         mnSettings.add(loadSigned);
+
+        rRandoms.setSelected(true);
+        rRandoms.setText("Run Randoms");
+        mnSettings.add(rRandoms);
 
         menu.add(mnSettings);
 
@@ -148,6 +160,7 @@ public class BotFrame extends javax.swing.JFrame {
 
         loginIndex.setText("Get Login Index");
         loginIndex.addActionListener(new java.awt.event.ActionListener() {
+
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 loginIndexActionPerformed(evt);
             }
@@ -156,6 +169,7 @@ public class BotFrame extends javax.swing.JFrame {
 
         doDraw.setText("Load Canvas");
         doDraw.addActionListener(new java.awt.event.ActionListener() {
+
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 doDrawActionPerformed(evt);
             }
@@ -169,23 +183,9 @@ public class BotFrame extends javax.swing.JFrame {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(consolePane, javax.swing.GroupLayout.DEFAULT_SIZE, 758, Short.MAX_VALUE)
-            .addComponent(clientPane, javax.swing.GroupLayout.DEFAULT_SIZE, 758, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jButton1)
-                .addContainerGap())
-        );
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(consolePane, javax.swing.GroupLayout.DEFAULT_SIZE, 758, Short.MAX_VALUE).addComponent(clientPane, javax.swing.GroupLayout.DEFAULT_SIZE, 758, Short.MAX_VALUE).addGroup(layout.createSequentialGroup().addComponent(jButton1).addContainerGap()));
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(clientPane, javax.swing.GroupLayout.PREFERRED_SIZE, 416, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(consolePane, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
-                .addContainerGap(14, Short.MAX_VALUE))
-        );
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(layout.createSequentialGroup().addComponent(clientPane, javax.swing.GroupLayout.PREFERRED_SIZE, 416, javax.swing.GroupLayout.PREFERRED_SIZE).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(consolePane, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(jButton1).addContainerGap(14, Short.MAX_VALUE)));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -253,7 +253,8 @@ public class BotFrame extends javax.swing.JFrame {
 
             try {
                 Thread.sleep(50);
-            } catch(Exception e) { }
+            } catch (Exception e) {
+            }
 
         } else {
             th.stop();
@@ -261,9 +262,13 @@ public class BotFrame extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void loadScriptsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadScriptsActionPerformed
+    }//GEN-LAST:event_loadScriptsActionPerformed
+
     public Graphics getGfx() {
         return this.g;
     }
+
     public Reflection getObjectValue(String name) {
         for (Reflection r : hooks) {
             if (r.getName().equals(name)) {
@@ -298,13 +303,15 @@ public class BotFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem loadRS;
+    private javax.swing.JMenuItem loadScripts;
     private javax.swing.JCheckBoxMenuItem loadSigned;
     private javax.swing.JMenuItem loginIndex;
     private javax.swing.JMenuBar menu;
     private javax.swing.JMenu mnBotting;
     private javax.swing.JMenu mnDebug;
+    private javax.swing.JMenu mnScripts;
     private javax.swing.JMenu mnSettings;
+    private javax.swing.JCheckBoxMenuItem rRandoms;
     // End of variables declaration//GEN-END:variables
 }

@@ -2,7 +2,6 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.rs247.util;
 
 import com.rs247.ui.BotFrame;
@@ -14,6 +13,7 @@ import java.awt.Color;
  * @author Wewt
  */
 public class Echo {
+
     private BotFrame frame;
     private Console console;
 
