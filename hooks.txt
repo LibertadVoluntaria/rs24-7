@@ -1,0 +1,6 @@
+getLoginIndex() gq v
+getPlayerCount() fe gb
+getCanvas() ts e
+getInterfaceActions() ab i
+getMouseComponent() sm N
+getItemName() mm n
